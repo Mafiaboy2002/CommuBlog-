@@ -139,6 +139,16 @@ app.get('/post/:id', async (req,res)=>{
     res.json(postDoc);
 })
 
+//serving the frontend
+app.use(express.static(path.join(__dirname, "frontend/build")))
+
+app.get("*",(req,res)=>{
+    res.sendFile(path.resolve(__dirname, "frontend",'build','index.html')),
+    function(err){
+        res.status(500).send(err)
+    }
+})
+
 app.listen(4000);
 
 //
